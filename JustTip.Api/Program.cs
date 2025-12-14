@@ -1,5 +1,6 @@
 using JustTip.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using JustTip.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,5 +21,9 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
+
+app.MapBusinesses();
+app.MapEmployees();
+
 
 app.Run();
