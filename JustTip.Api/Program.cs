@@ -24,6 +24,7 @@ app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 
 app.MapBusinesses();
 app.MapEmployees();
+app.MapRosters();
 
 
 app.Run();
