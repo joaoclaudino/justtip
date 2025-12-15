@@ -18,6 +18,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustTip.Application", "Just
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustTip.UnitTests", "JustTip.UnitTests\JustTip.UnitTests.csproj", "{9B0B73ED-4B8E-4F79-9A38-EC4D27965A2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustTip.Cli", "JustTip.Cli\JustTip.Cli.csproj", "{8BE72997-99D5-4D9C-A9CD-A4D688C89DEA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{35111A43-DE2A-4219-B0AB-16CB07FE7017}"
+	ProjectSection(SolutionItems) = preProject
+		ci.yml = ci.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,9 +53,16 @@ Global
 		{9B0B73ED-4B8E-4F79-9A38-EC4D27965A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B0B73ED-4B8E-4F79-9A38-EC4D27965A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B0B73ED-4B8E-4F79-9A38-EC4D27965A2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE72997-99D5-4D9C-A9CD-A4D688C89DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE72997-99D5-4D9C-A9CD-A4D688C89DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE72997-99D5-4D9C-A9CD-A4D688C89DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE72997-99D5-4D9C-A9CD-A4D688C89DEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{35111A43-DE2A-4219-B0AB-16CB07FE7017} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E11E5211-4A17-491C-A40F-0B05283B9023}

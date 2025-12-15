@@ -1,80 +1,79 @@
 ﻿# JustTip — Tipping Platform (API + CLI)
 
-JustTip is a .NET-based solution that models a tipping platform for hospitality businesses.
-It provides a REST API (with Swagger/OpenAPI) and a command-line interface (CLI) to manage
-businesses, employees, daily rosters, and proportional tip distribution.
+JustTip is a .NET solution that models a tipping platform for hospitality businesses.
+It provides a REST API (with Swagger/OpenAPI) and a CLI to manage businesses, employees,
+daily rosters (worked hours) and proportional tip distribution.
 
-The project is designed with clean architecture principles, focusing on clear separation
-of concerns, testability, and maintainability.
+## Features
+
+- Businesses and Employees management
+- Daily rosters with worked hours (upsert entries)
+- Tip distribution proportional to worked hours (2-decimal rounding with exact total allocation)
+- Swagger / OpenAPI documentation
+- Unit tests for core tip distribution rules
+- SQLite persistence (EF Core)
 
 ## Tech Stack
 
-- .NET (latest installed)
+- .NET
 - ASP.NET Core Minimal API
-- Entity Framework Core
-- SQLite
-- Swagger / OpenAPI (Swashbuckle)
-- xUnit (unit and integration tests)
-- GitHub Actions (CI)
+- EF Core + SQLite
+- Swagger (Swashbuckle)
+- xUnit
 
-## Getting Started
+## Running the API
 
-### Prerequisites
+Run:
+dotnet run --project JustTip.Api
 
-- .NET SDK installed
-- (Optional) EF Core CLI tools: dotnet tool install --global dotnet-ef
+Open:
+- Swagger UI: https://localhost:7035/swagger
+- Health check: https://localhost:7035/health
 
-### Running the API
+Note: the port can vary depending on your local launch profile. Check the console output for the actual URL.
 
-Run the API using the .NET CLI:
+## CLI
 
-dotnet run --project src/JustTip.Api
+The CLI talks to the API via HTTP.
 
-Once the application is running, open your browser at the following endpoints:
+Help:
+dotnet run --project JustTip.Cli -- --help
 
-Swagger UI:
-https://localhost:7035/swagger
+Example flow:
 
-Health check:
-https://localhost:7035/health
+1) Create a business
+dotnet run --project JustTip.Cli -- --base-url https://localhost:7035 businesses create --name "Cafe A"
 
-The exact port may vary depending on your local configuration. Check the console output
-for the actual listening address.
+2) List businesses
+dotnet run --project JustTip.Cli -- --base-url https://localhost:7035 businesses list
 
-## Database
+3) Add employees
+dotnet run --project JustTip.Cli -- --base-url https://localhost:7035 employees add --business-id <BUSINESS_ID> --name "John"
+dotnet run --project JustTip.Cli -- --base-url https://localhost:7035 employees add --business-id <BUSINESS_ID> --name "Mary"
 
-The application uses SQLite as its persistence layer.
+4) Ensure roster for a date
+dotnet run --project JustTip.Cli -- --base-url https://localhost:7035 rosters ensure --business-id <BUSINESS_ID> --date 2025-12-14
 
-The database file is created automatically when migrations are applied and the API starts.
-By default, the database file is named:
+5) Upsert worked hours
+dotnet run --project JustTip.Cli -- --base-url https://localhost:7035 rosters upsert-entry --business-id <BUSINESS_ID> --date 2025-12-14 --employee-id <EMPLOYEE_ID_1> --hours 8
+dotnet run --project JustTip.Cli -- --base-url https://localhost:7035 rosters upsert-entry --business-id <BUSINESS_ID> --date 2025-12-14 --employee-id <EMPLOYEE_ID_2> --hours 4
 
-justtip.db
+6) Distribute tips
+dotnet run --project JustTip.Cli -- --base-url https://localhost:7035 tips distribute --business-id <BUSINESS_ID> --date 2025-12-14 --total 120
 
-This file is intentionally excluded from source control.
+## Tests
+
+Run:
+dotnet test
 
 ## Project Structure
 
-src/
-  JustTip.Api              REST API (Minimal API, Swagger, HTTP endpoints)
-  JustTip.Domain           Domain entities and core business rules
-  JustTip.Infrastructure   EF Core, SQLite, persistence and data access
-
-## Development Notes
-
-- The API follows REST principles and exposes clear, predictable endpoints.
-- Business logic is isolated from infrastructure concerns.
-- Entity Framework Core is used with LINQ for data access.
-- The project favors explicit validation and clear error messages.
-- Code readability and maintainability are prioritized over over-engineering.
-
-## Roadmap
-
-- Business and Employee CRUD endpoints
-- Daily rosters and worked hours validation
-- Tip distribution logic proportional to worked hours
-- Command-line interface (CLI) consuming the API
-- Unit and integration tests covering business rules
-- CI pipeline with GitHub Actions
+JustTip.Api              REST API (Minimal API, Swagger, endpoints)
+JustTip.Application      Business rules (tip distribution service)
+JustTip.Domain           Domain entities
+JustTip.Infrastructure   EF Core + SQLite persistence
+JustTip.Cli              Command-line client (HTTP)
+JustTip.UnitTests        Unit tests
 
 ## License
 
