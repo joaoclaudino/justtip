@@ -1,4 +1,6 @@
-﻿# JustTip — Tipping Platform (API + CLI)
+﻿![CI](https://github.com/joaoclaudino/justtip/actions/workflows/main.yml/badge.svg)
+
+# JustTip — Tipping Platform (API + CLI)
 
 JustTip is a .NET solution that models a tipping platform for hospitality businesses.
 It provides a REST API (with Swagger/OpenAPI) and a CLI to manage businesses, employees,
@@ -74,6 +76,13 @@ JustTip.Domain           Domain entities
 JustTip.Infrastructure   EF Core + SQLite persistence
 JustTip.Cli              Command-line client (HTTP)
 JustTip.UnitTests        Unit tests
+
+## Design Decisions
+
+- Business rules (tip distribution) are isolated in the Application layer and fully unit-tested.
+- The API layer is kept thin, focusing only on HTTP concerns and validation.
+- SQLite is used for simplicity and portability.
+- A CLI client was added to demonstrate API consumption outside Swagger/UI.
 
 ## License
 
