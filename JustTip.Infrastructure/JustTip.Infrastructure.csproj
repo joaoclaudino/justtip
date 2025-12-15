@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JustTip.Application\JustTip.Application.csproj" />
     <ProjectReference Include="..\JustTip.Domain\JustTip.Domain.csproj" />
   </ItemGroup>
 

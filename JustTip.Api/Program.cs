@@ -1,6 +1,7 @@
+using JustTip.Api.Endpoints;
+using JustTip.Application.Tips;
 using JustTip.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using JustTip.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<JustTipDbContext>(options =>
     options.UseSqlite(cs);
 });
 
+builder.Services.AddSingleton<TipDistributionService>();
+
 var app = builder.Build();
 
 app.UseSwagger();
@@ -25,6 +28,7 @@ app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 app.MapBusinesses();
 app.MapEmployees();
 app.MapRosters();
+app.MapTips();
 
 
 app.Run();
